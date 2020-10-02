@@ -95,3 +95,44 @@ func main() {
 	}
 }
 ```
+
+###### **Parsing the racecards page**
+
+```Go
+func main() {
+
+	path := "/horse-racing/racecards/ascot/2020-10-03/1320/1/1/john-guest-racing-british-ebf-stakes"
+
+	proxy := "95.174.67.50:18080"
+
+	race := tfh.GetRacecardByPath(path, proxy)
+
+	fmt.Println("Datetime", race.Datetime)
+	fmt.Println("Distance", race.Distance)
+	fmt.Println("Class", race.Class)
+	fmt.Println("Title", race.Title)
+	fmt.Println("Currency", race.Currency)
+	fmt.Println("Winner", race.Winner)
+	fmt.Println("RaceType", race.RaceType)
+	fmt.Println("Surface", race.Surface)
+	fmt.Println("Racecourse", race.Racecourse)
+	fmt.Println("Going", race.Going)
+	fmt.Println("Types", race.Types)
+
+	for _, runner := range race.Entries {
+
+		fmt.Println("Wgt", runner.Wgt)
+		fmt.Println("Number", runner.Number)
+		fmt.Println("Draw", runner.Draw)
+		fmt.Println("Age", runner.Age)
+		fmt.Println("Rating", runner.Rating)
+		fmt.Println("HorseID", runner.HorseID)
+		fmt.Println("JockeyID", runner.JockeyID)
+		fmt.Println("TrainerID", runner.TrainerID)
+		fmt.Println("Horse", runner.Horse)
+		fmt.Println("Jockey", runner.Jockey)
+		fmt.Println("Trainer", runner.Trainer)
+		fmt.Println("")
+	}
+}
+```

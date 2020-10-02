@@ -35,6 +35,37 @@ type Runner struct {
 	Trainer   string
 }
 
+// Entry information about the upcoming race item.
+type Entry struct {
+	Wgt       float64
+	Number    int64
+	Draw      int64
+	Age       int64
+	Rating    int64
+	HorseID   int64
+	JockeyID  int64
+	TrainerID int64
+	Horse     string
+	Jockey    string
+	Trainer   string
+}
+
+// Racecard information about the upcoming race.
+type Racecard struct {
+	Datetime   time.Time
+	Distance   float64
+	Class      int64
+	Title      string
+	Currency   string
+	Winner     float64
+	RaceType   string
+	Surface    string
+	Racecourse string
+	Going      string
+	Types      RaceType
+	Entries    map[int64]Entry
+}
+
 // Race information about race.
 type Race struct {
 	Datetime   time.Time
