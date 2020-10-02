@@ -202,3 +202,27 @@ func GetRacecardByPath(path string, proxy string) *Racecard {
 
 	return nil
 }
+
+// GetRacecardByDate parsing the racecards for the whole day.
+func GetRacecardByDate(date time.Time, proxy string) []Racecard {
+
+	racecards := make([]Racecard, 0)
+
+	doc := get("/horse-racing/racepasses/racecardgridmeetings?meetingDate="+date.In(time.UTC).Format("2006-01-02")+"&region=0&meetingSort=1&meetingView=2", proxy)
+
+	doc.Find("div.w-racecard-grid-meeting li a").Each(func(i int, s *goquery.Selection) {
+
+		if res, err := s.Attr("href"); err {
+
+			if result := GetRacecardByPath(res, proxy); result != nil {
+
+				racecards = append(racecards, *result)
+
+				time.Sleep(time.Duration(1) * time.Second)
+			}
+		}
+
+	})
+
+	return racecards
+}
